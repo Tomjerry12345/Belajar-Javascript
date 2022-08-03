@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <form id="myForm">
+      Nama: <input type="text" id="nama" name="nama" />
+      <input type="submit" value="Submit" />
+    </form> -->
+    <!-- <p id="test"></p> -->
+
+    <table id="listku"></table>
+
+    <!-- <ul >
+
+    </ul> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      const listku = $("#listku");
+
+      // Get data by sinkronus
+
+      async function getData() {
+        try {
+          const response = await axios.get("https://news.e-andalan.id/api/v2/news");
+          const data = response.data.data;
+          // console.log(data);
+          for (x of data) {
+            console.log(x);
+            // listku.append(`<li>${x.deskripsi}</>`);
+            listku.append(`
+            <tr>
+              <td>${x.judul}</td>
+              <td>${x.kategori}</td>
+              <td>${x.deskripsi}</td>
+            </tr>
+            `);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getData();
+
+      // Get data by asinkronus
+
+      // axios
+      //   .get("https://news.e-andalan.id/api/v2/news")
+      //   .then((response) => {
+      //     // handle success
+      //     const data = response.data.data;
+      //     // console.log(data);
+      //     for (x of data) {
+      //       console.log(x);
+      //       // listku.append(`<li>${x.deskripsi}</>`);
+      //       listku.append(`
+      //       <tr>
+      //         <td>${x.judul}</td>
+      //         <td>${x.kategori}</td>
+      //         <td>${x.deskripsi}</td>
+      //       </tr>
+      //       `);
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     // handle error
+      //     console.log(error);
+      //   });
+    </script>
+  </body>
+</html>
